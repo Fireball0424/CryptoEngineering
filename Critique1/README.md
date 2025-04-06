@@ -1,4 +1,4 @@
-# Criteria 1 
+# Critique 1 
 
 ## How to use ? 
 1. 下載整包code 

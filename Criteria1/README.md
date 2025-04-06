@@ -8,6 +8,7 @@
 - [x] force user interaction 
 - [x] autofill and submit to decrease users' total interactions 
 - [x] if saved password in https and login page is http, warning user not to autofill
+- [] javascript attacker prevent 
  
 ## Extra functions 
 - [x] ask user to storage password 

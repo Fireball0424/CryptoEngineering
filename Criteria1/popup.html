@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Popup</title>
+  <style>
+    body {
+      width: 250px;
+      height: 250px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
+    .account {
+      padding: 10px;
+      margin: 5px;
+      background-color: #f0f0f0;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 200px;
+      text-align: center;
+      transition: background-color 0.3s;
+    }
+    .account:hover {
+      background-color: #d3d3d3;
+    }
+    #password-display {
+      margin-top: 10px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Accounts</h1>
+  <div id="account-list"></div>
+  <div id="password-display">
+    <p>Password: <span id="password"></span></p>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

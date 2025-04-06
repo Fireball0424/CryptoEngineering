@@ -8,7 +8,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
     // if isHttps is false and request.isHttps is true, warning user and ask whether to continue 
     if (!isHttps && request.isHttps) {
-      const continueWithoutHttps = confirm("You are not using HTTPS. Do you want to continue?");
+      const continueWithoutHttps = confirm("You are not using HTTPS. Are you sure you want to autofill the password?");
       if (!continueWithoutHttps) {
         return;
       }

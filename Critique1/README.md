@@ -8,12 +8,12 @@
 - [x] force user interaction 
 - [x] autofill and submit to decrease users' total interactions 
 - [x] if saved password in https and login page is http, warning user not to autofill
-- [ ] javascript attacker prevent 
+- [x] javascript attacker prevent 
+- [x] iframe attack prevent 
  
 ## Extra functions 
-- [x] ask user to storage password 
+- [x] ask user to storage and update password 
 
 ## How can improve ? 
 * Extend to multiple webs (Now only https://portal.nycu.edu.tw)
-* Prevent javascript attacker (not yet implement)
 * Instead using storage.sync API, connects to database 

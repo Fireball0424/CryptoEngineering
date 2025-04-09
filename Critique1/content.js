@@ -4,6 +4,12 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   const enterElement = document.querySelector('input[type="submit"][data-v-2b854fd1]');
   const isHttps = window.location.protocol === 'https:';
 
+// Check if in iframe 
+  if (window.top != window.self) {
+    console.log("Might be in an iframe");
+    return;
+  }
+
   if (accountElement && passwordElement && enterElement) {
 
     // if isHttps is false and request.isHttps is true, warning user and ask whether to continue 
@@ -19,8 +25,23 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
     triggerAllEvents(accountElement);
     triggerAllEvents(passwordElement);
-    enterElement.click();
-  } else {
+
+    // before send , check if form action is correct 
+    const formElement = accountElement.closest('form');
+    const originAction = new URL(request.savedAction);
+    const currentAction = new URL(formElement.action);
+
+    if (originAction.origin !== currentAction.origin) {
+      console.log("Form action is not correct");
+      return;
+    }
+    else{
+       enterElement.click();
+    }
+
+   
+  } 
+  else { // error which part is not found
     if (!accountElement) {
       console.error("Account input not found.");
     }
@@ -42,7 +63,6 @@ function triggerAllEvents(element) {
 }
 
 // To ask user whether to save the password or not
-
 const waitForEnterbuttonElement = setInterval(() => {
   const enterElement = document.querySelector('input[type="submit"][data-v-2b854fd1]');
   if (enterElement) {
@@ -56,18 +76,38 @@ const waitForEnterbuttonElement = setInterval(() => {
         const isHttps = window.location.protocol === 'https:';
         const account = accountElement.value;
         const password = passwordElement.value;
+        const formElement = accountElement.closest('form');
         
-        // ask user whether to save the password or not
-        const savePassword = confirm(`Do you want to save the password for ${account}?`);
-        if (savePassword) {
-          chrome.storage.sync.set({
-            [account]: {
-              password: password,
-              isHttps: isHttps
+        // check if account has been saved 
+        chrome.storage.sync.get(account, function (data) {
+          if (data[account]) {
+            const savedPassword = data[account].password;
+            if (savedPassword !== password) {
+              const updatePassword = confirm(`The password for ${account} has changed. Do you want to update it?`);
+              if (updatePassword) {
+                chrome.storage.sync.set({
+                  [account]: {
+                    password: password,
+                    isHttps: isHttps, 
+                    savedAction: formElement.action 
+                  }
+                });
+              }
             }
-          });
-        }
-        
+          }
+          else{
+            const savePassword = confirm(`Do you want to save the password for ${account}?`);
+            if (savePassword) {
+              chrome.storage.sync.set({
+                [account]: {
+                  password: password,
+                  isHttps: isHttps, 
+                  savedAction: formElement.action // save the current actio
+                }
+               });
+            }
+          }
+        });
       }
   });
   }

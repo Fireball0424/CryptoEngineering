@@ -25,7 +25,6 @@
       "tabs"
     ],
     "host_permissions": [
-      "https://irdashboard.cirda.nycu.edu.tw/login/*", 
       "https://portal.nycu.edu.tw/*", 
       "https://example.com/*"
     ]

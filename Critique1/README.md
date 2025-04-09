@@ -16,4 +16,4 @@
 ## How can improve ? 
 * Extend to multiple webs (Now only https://portal.nycu.edu.tw)
 * Prevent javascript attacker (not yet implement)
-
+* Instead using storage.sync API, connects to database 

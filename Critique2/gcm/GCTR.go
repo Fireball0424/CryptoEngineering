@@ -5,6 +5,7 @@ import (
 	"Critique2/utils"
 )
 
+// Algorithm 3
 func GCTR(ICB block.Block, Input []block.Block) []block.Block {
 	var m int = len(Input)
 	var CountBlock block.Block = ICB
@@ -13,7 +14,7 @@ func GCTR(ICB block.Block, Input []block.Block) []block.Block {
 	for i := 1; i <= m; i++ {
 		var CIPH_K block.Block = utils.CIPH(CountBlock)
 		Y[i-1] = CIPH_K.Xor(Input[i-1])
-		CountBlock = inc32(CountBlock)
+		CountBlock = utils.Inc32(CountBlock)
 	}
 	return Y
 }

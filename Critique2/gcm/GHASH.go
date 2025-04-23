@@ -4,6 +4,7 @@ import (
 	"Critique2/block"
 )
 
+// Algorithm 2
 func GHASH(H block.Block, X []block.Block) block.Block {
 	var Y block.Block
 	Y.SetZero()

@@ -1,0 +1,55 @@
+ca:
+  root:
+    type: root
+    cert: ./root/root.cert.pem
+    private_key: ./root/root.key.pem
+    csr: ./root/root.csr.pem
+    is_ca: true
+    organization: "NYCU-CE"
+    common_name: "NYCU-CE"
+    validity_years: 10
+    validity_month: 0
+    validity_day: 0
+  intermediate:
+    type: intermediate
+    cert: ./intermediate/intermediate.cert.pem
+    private_key: ./intermediate/intermediate.key.pem
+    csr: ./intermediate/intermediate.csr.pem
+    parent_cert: ./root/root.cert.pem
+    parent_key: ./root/root.key.pem
+    is_ca: true
+    organization: "NYCU-CE"
+    common_name: "NYCU-CE"
+    validity_years: 10
+    validity_month: 0
+    validity_day: 0
+  server:
+    type: server
+    cert: ./server/server.cert.pem
+    private_key: ./server/server.key.pem
+    csr: ./server/server.csr.pem
+    parent_cert: ./intermediate/intermediate.cert.pem
+    parent_key: ./intermediate/intermediate.key.pem
+    is_ca: false
+    organization: "NYCU-CE"
+    common_name: "NYCU-CE"
+    validity_years: 10
+    validity_month: 0
+    validity_day: 0
+    dns_names: ["localhost"]
+    ip_addresses: ["127.0.0.1", "0.0.0.0"]
+  client:
+    type: client
+    cert: ./client/client.cert.pem
+    private_key: ./client/client.key.pem
+    csr: ./client/client.csr.pem
+    parent_cert: ./intermediate/intermediate.cert.pem
+    parent_key: ./intermediate/intermediate.key.pem
+    is_ca: false
+    organization: "NYCU-CE"
+    common_name: "NYCU-CE"
+    validity_years: 10
+    validity_month: 0
+    validity_day: 0
+    dns_names: ["localhost"]
+    ip_addresses: ["127.0.0.1", "0.0.0.0"]

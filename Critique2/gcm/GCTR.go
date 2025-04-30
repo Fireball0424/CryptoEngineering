@@ -8,6 +8,10 @@ import (
 // Algorithm 3
 func GCTR(ICB block.Block, Input []block.Block) []block.Block {
 	var m int = len(Input)
+	if m == 0 {
+		return []block.Block{}
+	}
+
 	var CountBlock block.Block = ICB
 
 	var Y []block.Block = make([]block.Block, m)
@@ -16,5 +20,6 @@ func GCTR(ICB block.Block, Input []block.Block) []block.Block {
 		Y[i-1] = CIPH_K.Xor(Input[i-1])
 		CountBlock = utils.Inc32(CountBlock)
 	}
+	
 	return Y
 }

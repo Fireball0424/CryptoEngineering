@@ -16,6 +16,7 @@ func Multiply(X Block, Y Block) Block {
 			Z[i+1] = Z[i].Xor(V[i])
 		}
 
+		// avoid overflow
 		if V[i].GetLSBit(0) == 0 {
 			V[i+1] = V[i].ShiftRight(1)
 		} else {

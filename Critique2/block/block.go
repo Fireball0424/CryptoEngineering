@@ -12,7 +12,16 @@ func (b *Block) SetZero() {
 	b.Lo = 0
 }
 
-// get the i-th bit (count from left)
+// set the i-th bit (count from left) 0-based index
+func (b *Block) SetBit(i int) { 
+	if i < 64 {
+		b.Hi |= (1 << (63 - i))
+	} else {
+		b.Lo |= (1 << (127 - i))
+	}
+}
+
+// get the i-th bit (count from left) 0-based index 
 func (b *Block) GetMSBit(i int) int {
 	if i < 64 {
 		return int((b.Hi >> (63 - i)) & 1)
@@ -21,7 +30,7 @@ func (b *Block) GetMSBit(i int) int {
 	}
 }
 
-// get the i-th bit (count from right)
+// get the i-th bit (count from right) 0-based index
 func (b *Block) GetLSBit(i int) int {
 	if i < 64 {
 		return int((b.Lo >> i) & 1)
@@ -48,3 +57,5 @@ func (b *Block) ShiftRight(i int) Block {
 func (b *Block) Xor(other Block) Block {
 	return Block{Hi: b.Hi ^ other.Hi, Lo: b.Lo ^ other.Lo}
 }
+
+

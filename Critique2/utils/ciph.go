@@ -7,8 +7,7 @@ import (
 
 // Assume CIPH is AES-128
 func CIPH(Input block.Block) block.Block {
-	var key []byte = []byte("0123456789abcdef") // 16 bytes = AES-128
-	blockCipher, err := aes.NewCipher(key)
+	blockCipher, err := aes.NewCipher(Key)
 
 	if err != nil {
 		panic(err.Error())

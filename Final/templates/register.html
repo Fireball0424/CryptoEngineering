@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Register</title>
+</head>
+<body>
+  <h1>Register Page</h1>
+  <form id = "registerForm">
+    <input type="text" placeholder="Username" required /><br>
+    <input type="password" placeholder="Password" required /><br>
+    <button type="submit">Register</button>
+  </form>
+  <button onclick="goToLogin()">Go to Login</button>
+
+  <script>
+    function goToLogin() {
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>

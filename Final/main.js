@@ -1,19 +1,18 @@
-const { Client } = require('pg');
+const { app, BrowserWindow, ipcMain } = require('electron');
+const path = require('path');
+const {handleLogin} = require('./backend/auth.js');
 
-const client = new Client({
-  user: 'client',
-  host: '127.0.0.1',
-  database: 'clientdev',
-  password: 'client',
-  port: 5433
+app.whenReady().then(() => {
+  const mainWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    webPreferences: {
+      nodeIntegration: true
+    }
+  });
+
+  mainWindow.loadFile('templates/login.html');
 });
 
-client.connect()
-  .then(() => {
-    console.log('Connected');
-    return client.query('SELECT NOW()');
-  })
-  .then(res => {
-    console.log(res.rows);
-    return client.end();
-  });
+// Handle login event 
+ipcMain.handle('login', handleLogin);

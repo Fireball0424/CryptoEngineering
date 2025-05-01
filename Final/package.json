@@ -4,17 +4,18 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "electron --no-sandbox ."
+    "tunnel": "ssh -f -i ~/.ssh/SSH_KMS.pem -L 5433:0.0.0.0:5432 ubuntu@13.55.95.185 -N",
+    "electron": "electron .",
+    "start": "concurrently \"npm run tunnel\" \"sleep 2 && npm run electron\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "pg": "^8.15.6",
-    "ssh2": "^1.16.0",
-    "tunnel-ssh": "^5.2.0"
+    "pg": "^8.15.6"
   },
   "devDependencies": {
+    "concurrently": "^9.1.2",
     "electron": "^36.0.1"
   }
 }

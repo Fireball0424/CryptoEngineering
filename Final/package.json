@@ -4,9 +4,17 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron --no-sandbox ."
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "pg": "^8.15.6",
+    "ssh2": "^1.16.0",
+    "tunnel-ssh": "^5.2.0"
+  },
+  "devDependencies": {
+    "electron": "^36.0.1"
+  }
 }

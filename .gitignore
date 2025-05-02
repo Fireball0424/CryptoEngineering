@@ -1,2 +1,3 @@
 Final/node_modules/
 *.log
+.env

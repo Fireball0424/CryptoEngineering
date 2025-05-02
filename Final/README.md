@@ -3,7 +3,9 @@
 ## How to Run ?
 
 ```
-npm install && npm start 
+$npm install 
+// Change .env-template to .env (and add custom parameters)
+$npm start 
 ```
 
 ## File structure
@@ -14,18 +16,19 @@ Final/
         |--- auth.js        # Deal with user login and register
     |--- renderer/          # This file for front-end logic 
         |--- login.js
-        |--- register.js
     |--- templates/ 
         |--- login.html
         |--- register.html
-  
+        |--- main.html
+        |--- otp.html 
     |--- main.js 
+    |--- preload.js 
     |--- package.json
     |--- package-lock.json
+    |--- logger.js          # Output log to client.log 
     |--- README.md
+    |--- .env-template 
 ```
 ## TODO 
-* Test login logical correct or not 
-* Write register logical 
-    * We need email infomation when register 
-    * or email is username ? 
+* (Wait RegisterCreate and RegisterVerify API) Test handleRegister 
+* Change handleLogin to api version 

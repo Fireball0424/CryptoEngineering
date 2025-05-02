@@ -7,8 +7,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
   
-    console.log("Username:", username);
-    console.log("Password:", password);
+    console.log(username, password);
 
     const result = await window.electronAPI.login(username, password);
     

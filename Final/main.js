@@ -7,9 +7,9 @@ function createWindow() {
     width: 800,
     height: 600,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'), // 用來 expose ipcRenderer
-      contextIsolation: true, // 隔離上下文（安全）
-      nodeIntegration: false  // 不允許直接在 HTML 中 require Node.js 模組
+      preload: path.join(__dirname, 'preload.js'), 
+      contextIsolation: true, 
+      nodeIntegration: false  
     }
   });
 

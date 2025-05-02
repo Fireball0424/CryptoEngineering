@@ -12,7 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "pg": "^8.15.6"
+    "pg": "^8.15.6",
+    "winston": "^3.17.0"
   },
   "devDependencies": {
     "concurrently": "^9.1.2",

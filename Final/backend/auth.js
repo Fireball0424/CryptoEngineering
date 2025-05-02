@@ -5,7 +5,7 @@ require('dotenv').config();
 const apiBaseUrl = process.env.API_BASE_URL;
 const axios = require('axios');
 
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 const { session } = require('electron');
 
 // Handle Login 

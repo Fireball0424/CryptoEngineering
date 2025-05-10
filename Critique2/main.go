@@ -3,6 +3,7 @@ package main
 import (
 	"Critique2/gcm"
 	"Critique2/utils"
+	"fmt"
 )
 
 func main() {
@@ -21,6 +22,6 @@ func main() {
 		println("Authentication failed")
 	} else {
 		println("Authentication succeeded")
-		println(utils.BitsToString(result))
+		fmt.Printf("Result: %s", utils.BitsToString(result))
 	}
 }

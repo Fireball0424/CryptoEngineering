@@ -37,19 +37,12 @@ func BlocksToBits(b []block.Block) []Bit {
 	return bits[:]
 }
 
-func IntToBitString(num int, length int) []Bit {
-	var bits []Bit
-	for num > 0 {
-		bits = append(bits, Bit(num%2 == 1))
-		num = num / 2
+func IntToBitString(n int, size int) []Bit {
+	bits := make([]Bit, size)
+	for i := size - 1; i >= 0; i-- {
+		bits[i] = (n & 1) == 1
+		n >>= 1
 	}
-
-	if len(bits) < length {
-		bits = append(make([]Bit, length-len(bits)), bits...)
-	} else if len(bits) > length {
-		bits = bits[len(bits)-length:]
-	}
-
 	return bits
 }
 
@@ -112,22 +105,26 @@ func BitsNotEquals(a []Bit, b []Bit) bool {
 
 func StringToBits(s string) []Bit {
 	var bits []Bit
-	for _, c := range s {
-		bits = append(bits, IntToBitString(int(c), 8)...)
+	for _, b := range []byte(s) {
+		bits = append(bits, IntToBitString(int(b), 8)...)
 	}
 	return bits
 }
 
 func BitsToString(b []Bit) string {
-	var s string
+	if len(b)%8 != 0 {
+		panic("BitsToString: input length is not a multiple of 8")
+	}
+
+	bytes := make([]byte, len(b)/8)
 	for i := 0; i < len(b); i += 8 {
-		c := 0
+		var c byte
 		for j := 0; j < 8; j++ {
 			if b[i+j] {
 				c |= 1 << (7 - j)
 			}
 		}
-		s += string(rune(c))
+		bytes[i/8] = c
 	}
-	return s
+	return string(bytes)
 }

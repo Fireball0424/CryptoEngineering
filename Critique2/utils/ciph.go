@@ -13,13 +13,13 @@ func CIPH(Input block.Block) block.Block {
 		panic(err.Error())
 	}
 
-	var plainText []byte
-	var cipherText []byte
+	var plainText [16]byte
+	var cipherText [16]byte
 
-	InputArray := []block.Block{Input}
-	plainText = BlocksToBytes(InputArray)
+	InputBytes := BlocksToBytes([]block.Block{Input})
+	copy(plainText[:], InputBytes[:16])
 
 	blockCipher.Encrypt(cipherText[:], plainText[:]) // TODO: Check
 
-	return BytesToBlocks(cipherText)[0]
+	return BytesToBlocks(cipherText[:])[0]
 }

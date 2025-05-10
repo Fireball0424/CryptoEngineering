@@ -2,7 +2,6 @@ package gcm
 
 import (
 	"Critique2/block"
-	"Critique2/utils"
 	. "Critique2/utils"
 	"math"
 )
@@ -20,13 +19,13 @@ func GCM_AE(IV []Bit, PlainText []Bit, AAD []Bit) ([]Bit, []Bit) {
 	if len(IV) == 96 {
 		J0 = BitsToBlocks(IV)[0]
 		J0.SetBit(127)
+	} else {
 		s := 128*int(math.Ceil(float64(len(IV))/128)) - len(IV)
-
 		J0 = GHASH(H, BitsToBlocks(ConcatBits(ConcatBits(IV, make([]Bit, s+64)), IntToBitString(len(IV), 64))))
 	}
 
 	// Step 3
-	C := utils.BlocksToBits(GCTR(utils.Inc32(J0), utils.BitsToBlocks(PlainText)))
+	C := GCTR(Inc32(J0), PlainText)
 
 	// Step 4
 	u := 128*int(math.Ceil(float64(len(C))/128)) - len(C)
@@ -42,7 +41,7 @@ func GCM_AE(IV []Bit, PlainText []Bit, AAD []Bit) ([]Bit, []Bit) {
 	var S block.Block = GHASH(H, BitsToBlocks(tempBitString))
 
 	// Step 6
-	T := utils.BlocksToBits(GCTR(J0, []block.Block{S}))[:TagLength]
+	T := GCTR(J0, BlocksToBits([]block.Block{S}))[:TagLength] // TODO: Check
 
 	return C, T
 
@@ -64,15 +63,15 @@ func GCM_AD(IV []Bit, C []Bit, AAD []Bit, T []Bit) []Bit {
 	var J0 block.Block
 
 	if len(IV) == 96 {
-		J0 = utils.BitsToBlocks(IV)[0]
+		J0 = BitsToBlocks(IV)[0]
 		J0.SetBit(127)
 	} else {
-		s := 128*int(math.Ceil(float64(len(IV)/128))) - len(IV)
+		s := 128*int(math.Ceil(float64(len(IV))/128)) - len(IV)
 		J0 = GHASH(H, BitsToBlocks(ConcatBits(ConcatBits(IV, make([]Bit, s+64)), IntToBitString(len(IV), 64))))
 	}
 
 	// Step 4
-	P := BlocksToBits(GCTR(utils.Inc32(J0), utils.BitsToBlocks(C)))
+	P := GCTR(Inc32(J0), C)
 
 	// Step 5
 	u := 128*int(math.Ceil(float64(len(C))/128)) - len(C)
@@ -88,7 +87,7 @@ func GCM_AD(IV []Bit, C []Bit, AAD []Bit, T []Bit) []Bit {
 	var S block.Block = GHASH(H, BitsToBlocks(tempBitString))
 
 	// Step 7
-	TT := BlocksToBits(GCTR(J0, []block.Block{S}))[:TagLength]
+	TT := GCTR(J0, BlocksToBits([]block.Block{S}))[:TagLength]
 
 	// Step 8
 	if BitsNotEquals(T, TT) {

@@ -109,3 +109,25 @@ func BitsNotEquals(a []Bit, b []Bit) bool {
 	}
 	return false
 }
+
+func StringToBits(s string) []Bit {
+	var bits []Bit
+	for _, c := range s {
+		bits = append(bits, IntToBitString(int(c), 8)...)
+	}
+	return bits
+}
+
+func BitsToString(b []Bit) string {
+	var s string
+	for i := 0; i < len(b); i += 8 {
+		c := 0
+		for j := 0; j < 8; j++ {
+			if b[i+j] {
+				c |= 1 << (7 - j)
+			}
+		}
+		s += string(rune(c))
+	}
+	return s
+}

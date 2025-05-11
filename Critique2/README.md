@@ -27,7 +27,7 @@ You can see the interface in http://localhost:8080
     |- utils_test.go    // Test convertion between bits and string 
 |- templates/
     |- index.html       // Front-end page 
-|- main.go              // Can modify here to test different data 
+|- main.go              // Run the front-end 
 ```
 
 ## Web Input Format

@@ -6,6 +6,8 @@
 go run main.go
 ```
 
+You can see the interface in http://localhost:8080
+
 ## File Structure 
 ```
 - Critique2/

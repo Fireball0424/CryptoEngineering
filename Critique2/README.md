@@ -24,6 +24,7 @@ You can see the interface in http://localhost:8080
     |- utils.go         // Bits Basic Operations and Inc32 
     |- ciph.go          // CIPH_K (know use AES) 
     |- const.go         // Specific Key Length and TagLength 
+    |- utils_test.go    // Test convertion between bits and string 
 |- templates/
     |- index.html       // Front-end page 
 |- main.go              // Can modify here to test different data 

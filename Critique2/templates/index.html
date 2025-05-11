@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>首頁</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: row;
+            height: 100vh;
+            margin: 0;
+        }
+        .column {
+            flex: 1;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+        .top-right {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div class="top-right">
+        <a href="/GMAC"><button>切換到 GMAC</button></a>
+    </div> -->
+
+    <div class="column">
+        <h2>Encryption</h2>
+        <form method="POST" action="encrypt">
+            <table>
+                <tr>
+                    <td>PlainText:</td>
+                    <td><input type="text" name="PlainText" placeholder="Please Input PlainText" /></td>
+                </tr>
+                <tr>
+                    <td>Authenticated Associated Data (AAD) </td>
+                    <td><input type="text" name="AAD" placeholder="Please Input AAD" /></td>
+                </tr>
+                <tr>
+                    <td>IV:</td>
+                    <td><input type="text" name="IV" placeholder="Please Input Custom IV" /> </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="submit" value="Encrypt" /></td>
+                </tr>
+            </table>
+        </form>
+        <p>{{.CipherText}}</p>
+        <p>{{.Tag}}</p>
+    </div>
+
+    <div class="column">
+        <h2>Decryption</h2>
+        <form method="POST" action="decrypt">
+            <table>
+                <tr>
+                    <td>CipherText:</td>
+                    <td><input type="text" name="CipherText" placeholder="Please Input Cipher Text" /></td>
+                </tr>
+                <tr>
+                    <td>Tag:</td>
+                    <td><input type="text" name="Tag" placeholder="Please Input Tag" /></td>
+                </tr>
+                <tr>
+                    <td>Authenticated Associated Data (AAD) </td>
+                    <td><input type="text" name="AAD" placeholder="Please Input AAD" /></td>
+                </tr>
+                <tr>
+                    <td>IV:</td>
+                    <td><input type="text" name="IV" placeholder="Please Input Custom IV" /> </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="submit" value="Decrypt" /></td>
+                </tr>
+            </table>
+        </form>
+        <p>{{.PlainText}}</p>
+    </div>
+</body>
+</html>

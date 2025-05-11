@@ -7,7 +7,7 @@ import (
 
 func TestGCTR(t *testing.T) {
 	var testText string = "CryspyHashBrowns"
-	Input := utils.StringToBits(testText)
+	Input := utils.StringToBits(testText, false)
 	icb := utils.BitsToBlocks(utils.IntToBitString(0, 96))[0]
 	res := GCTR(icb, Input)
 	dec_res := GCTR(icb, res)
@@ -25,8 +25,8 @@ func TestGCM(t *testing.T) {
 	var plainText string = "This is plain text"
 	var AAD string = "This is authenticated associated data"
 
-	plainTextBits := utils.StringToBits(plainText)
-	AADBits := utils.StringToBits(AAD)
+	plainTextBits := utils.StringToBits(plainText, false)
+	AADBits := utils.StringToBits(AAD, false)
 	C, T := GCM_AE(IV, plainTextBits, AADBits)
 
 	result := GCM_AD(IV, C, AADBits, T)

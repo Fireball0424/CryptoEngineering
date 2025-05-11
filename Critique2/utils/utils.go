@@ -2,6 +2,7 @@ package utils
 
 import (
 	"Critique2/block"
+	"encoding/hex"
 )
 
 type Bit bool
@@ -103,15 +104,26 @@ func BitsNotEquals(a []Bit, b []Bit) bool {
 	return false
 }
 
-func StringToBits(s string) []Bit {
+func StringToBits(s string, isHex bool) []Bit {
+	var bytes []byte
+	if isHex {
+		bytes_tmp, err := hex.DecodeString(s)
+		if err != nil {
+			panic(err)
+		}
+		bytes = bytes_tmp
+	} else {
+		bytes = []byte(s)
+	}
+
 	var bits []Bit
-	for _, b := range []byte(s) {
+	for _, b := range bytes {
 		bits = append(bits, IntToBitString(int(b), 8)...)
 	}
 	return bits
 }
 
-func BitsToString(b []Bit) string {
+func BitsToString(b []Bit, isHex bool) string {
 	if len(b)%8 != 0 {
 		panic("BitsToString: input length is not a multiple of 8")
 	}
@@ -126,5 +138,9 @@ func BitsToString(b []Bit) string {
 		}
 		bytes[i/8] = c
 	}
-	return string(bytes)
+	if isHex {
+		return hex.EncodeToString(bytes)
+	} else {
+		return string(bytes)
+	}
 }

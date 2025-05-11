@@ -25,3 +25,10 @@ go run main.go
 |- main.go              // Can modify here to test different data 
 ```
 
+## Web Input Format
+* PlainText: String 
+* AAD: String 
+* IV: String 
+
+* CipherText: HexString
+* Tags: HexString 
